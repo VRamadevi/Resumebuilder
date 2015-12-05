@@ -1,0 +1,222 @@
+var Xboard=''
+
+function checkform2(){
+	
+	if(XBoard_valid()){}else{return false;}
+	if(Xschool_valid()){}else{return false;}
+	if(Xyear_valid()){}else{return false;}
+	if(Xmarks_valid()){}else{return false;}
+	if(Xcertificate_valid()){}else{return false;}
+	if(X2Board_valid()){}else{return false;}
+	if(X2school_valid()){}else{return false;}
+	if(X2year_valid()){}else{return false;}
+	if(X2marks_valid()){}else{return false;}
+	if(X2certificate_valid()){}else{return false;}
+	if(UGcourse_valid()){}else{return false;}
+	if(UGspec_valid()){}else{return false;}
+	if(UGuniv_valid()){}else{return false;} 
+	if(UGyear_valid()){}else{return false;}
+	if(UGmarks_valid){}else{return false;}
+	if(UGcertf_valid()){}else{return false;}
+	
+return true;
+}
+
+
+/*-------------------  x -------------------------*/
+function XBoard_valid(){
+	Xboard=$('select[name="Xboard"] option:selected').val();
+	if(Xboard=='' || Xboard==null ){
+		$("#Xboard_test").empty();
+		$("#Xboard_test").append("Please select Board");
+		return false;		
+	}
+	else{$("#Xboard_test").empty();}
+return true;
+}
+
+function Xschool_valid() {
+	Xschool=$("input[name=Xschool]").val();
+	if(Xschool=='' || Xschool==null ){
+		$("#Xschool_test").empty();
+		$("#Xschool_test").append("Please Enter School Name");
+		return false;		
+	}
+	else{$("#Xschool_test").empty();}
+return true;
+}
+function Xyear_valid(){
+	Xyear=$('select[name="Xyear"] option:selected').val();
+	if(Xyear=='' || Xyear==null ){
+		$("#Xyear_test").empty();
+		$("#Xyear_test").append("Please select year");
+		return false	;	
+	}
+	else{$("#Xyear_test").empty();}
+return true;
+}
+function Xmarks_valid(){
+	Xmarks=$("input[name=Xmarks]").val();	
+	if(Xmarks=='' || Xmarks==null ){
+		$("#Xmarks_test").empty();
+		$("#Xmarks_test").append("Please Enter MArks");
+		return false;		
+	}
+	else if(isNaN(Xmarks))	{
+		$("#Xmarks_test").empty();
+		$("#Xmarks_test").append("Please Enter Numerical digits only");
+		return false;		
+	}
+	else{$("#Xmarks_test").empty();}
+return true;
+}
+function Xcertificate_valid(){
+	Xcertificate=$("#Xcertificate").val();
+	if(Xcertificate=='' || Xcertificate==null){
+	$("#Xcertificate_test").empty();
+		$("#Xcertificate_test").append("Please Upload Scanned Certificate");
+		return false;		
+	}
+	else{$("#Xcertificate_test").empty();}
+return true;
+}
+
+/*-------------------  XXIIIIIIIIIIIIIii -------------------------*/
+function X2Board_valid(){
+	X2board=$('select[name="X2board"] option:selected').val();
+	if(X2board=='' || X2board==null ){
+		$("#X2board_test").empty();
+		$("#X2board_test").append("Please select Intermediate Board");
+		return false;	
+	}
+	else{$("#X2board_test").empty();}
+return true;
+}
+function X2school_valid() {
+	X2school=$("input[name=X2school]").val();
+	if(X2school=='' || X2school==null ){
+		$("#X2school_test").empty();
+		$("#X2school_test").append("Please Enter School Name");
+		return false;		
+	}
+	else{$("#X2school_test").empty();}
+return true;
+}
+function X2year_valid(){
+	X2year=$('select[name="X2year"] option:selected').val();
+	if(X2year=='' || X2year==null ){
+		$("#X2year_test").empty();
+		$("#X2year_test").append("Please select year");
+		return false;		
+	}
+	else{$("#X2year_test").empty();}
+return true;
+}
+function X2marks_valid(){
+	X2marks=$("input[name=X2marks]").val();	
+	if(X2marks=='' || X2marks==null ){
+		$("#X2marks_test").empty();
+		$("#X2marks_test").append("Please Enter MArks");
+		return false;		
+	}
+	else if(isNaN(X2marks))	{
+		$("#X2marks_test").empty();
+		$("#X2marks_test").append("Please Enter Numerical digits only");
+		return false;		
+	}
+	else{$("#X2marks_test").empty();}
+return true;
+}
+function X2certificate_valid(){
+	X2certificate=$("#X2certificate").val();
+	if(X2certificate=='' || X2certificate==null){
+	$("#X2certificate_test").empty();
+		$("#X2certificate_test").append("Please Upload Scanned Certificate");
+		return false;		
+	}
+	else{$("#X2certificate_test").empty();}
+return true;
+}
+
+/*------------------- UUUUUUUUUU UGGGGGGGG-------------------------*/
+function UGcourse_valid(){
+UGcourse=$('select[name="UGcourse"] option:selected').val();
+	if(UGcourse=='' || UGcourse==null ){
+		$("#UGcourse_test").empty();
+		$("#UGcourse_test").append("Please select Course");
+		return false;		
+	}
+	else{$("#UGcourse_test").empty();}
+return true;
+}
+function UGspec_valid(){
+UGspec=$('select[name="UGspec"] option:selected').val();
+	if(UGspec=='' || UGspec==null ){
+		$("#UGspec_test").empty();
+		$("#UGspec_test").append("Please select Specialisation");
+		return false;		
+	}
+	else{$("#UGspec_test").empty();}
+return true;
+}
+function  UGuniv_valid(){
+UGuniv=$('select[name="UGuniv"] option:selected').val();
+	if(UGuniv=='' || UGuniv==null ){
+		$("#UGuniv_test").empty();
+		$("#UGuniv_test").append("Please select University");
+		return false;		
+	}
+	else{$("#UGuniv_test").empty();}
+return true;
+}
+
+function  UGyear_valid(){
+UGyear=$('select[name="UGyear"] option:selected').val();
+	if(UGyear=='' || UGyear==null ){
+		$("#UGyear_test").empty();
+		$("#UGyear_test").append("Please select year");
+		return false;		
+	}
+	else{$("#UGyear_test").empty();}
+return true;
+}
+function UGmarks_valid(){
+	UGmarks=$("input[name=UGmarks]").val();	
+	if(UGmarks=='' || UGmarks==null ){
+		$("#UGmarks_test").empty();
+		$("#UGmarks_test").append("Please Enter MArks");
+		return false;		
+	}
+	else if(isNaN(UGmarks))	{
+		$("#UGmarks_test").empty();
+		$("#UGmarks_test").append("Please Enter Numerical digits only");
+		return false;		
+	}
+	else{$("#UGmarks_test").empty();}
+return true;
+}
+
+function UGcertf_valid(){
+	UGcertf=$("#UGcertf").val();
+	if(UGcertf=='' || UGcertf==null){
+	$("#UGcertf_test").empty();
+		$("#UGcertf_test").append("Please Upload Scanned Certificate");
+		return false;		
+	}
+	else{$("#UGcertf_test").empty();}
+return true;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,207 @@
+<html>
+<head>
+  <link rel="stylesheet" href="{{MEDIA_URL}}css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{MEDIA_URL}}css/home.css">
+
+  <script src="{{MEDIA_URL}}js/bootstrap.min.js"></script>  
+  <script src="{{MEDIA_URL}}js/jquery.min.js"></script>  
+  <script src="{{MEDIA_URL}}js/load.js"></script>
+ 	
+  <script type="text/javascript"> 	
+	$(document).ready(function(){
+		$("#other_lang").click(function(){
+			var lang_id= $('#languages input').last().attr('id');
+			l_id=parseInt(lang_id[4])+1;
+			l_name='lang'+l_id
+			$("#languages").append("<input type='text' class='form-control tb' name='"+l_name+"' id='"+l_name+"'/><br>");
+		})
+		$("#other_achievement").click(function(){
+			var achievement_id= $('#achievement input').last().attr('id');
+			alert(achievement_id[achievement_id.length-1]);
+			a_id=parseInt(achievement_id[achievement_id.length-1])+1;
+			a_name='achievement'+a_id
+			$("#achievement").append("<input type='text' class='form-control tb' name='"+a_name+"' id='"+a_name+"'/><br>");
+
+		})
+		
+		$("#mini_link").click(function(){
+			$("#mini").show();
+			$("#mini_link").hide();
+		})
+		$("#additional_link").click(function(){
+			$("#additional").show();
+			$("#additional_link").hide();
+		})
+
+	})
+  
+  </script>
+</head>
+
+<body>
+<div class ="container-fluid">
+  <div class='row'>
+     <div class='col-sm-1'></div>
+     <div class='col-sm-10'>
+	<img class='image-responsive' src="{{MEDIA_URL}}images/ts.png" style="height:13%">
+	<!--<span class='text-primary' style='width:25px'> Resume Builder</span>-->
+	<div  class='row' style="border:solid black 1px;padding:5px">	
+	<div class='col-sm-10'>
+	  <form  method='post' action='resume_builder/' enctype="multipart/form-data" class='form-horizontal'>
+<!----- Projct Details -------------->
+  	     <h5><strong> Project Details</strong></h5>
+    	     <h5><strong> Main Project</strong></h5>
+
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Title <span class='red'>* </span> : </span>
+      			<div class="col-sm-8">
+				    <input type='text' class="form-control tb " id='M_title' name='M_title'>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Duration(in months) <span class='red'>* </span> : </span>
+      			<div class="col-sm-8">
+				<select id="M_duration" class=" tb" name="M_duration">
+					<option value=''>--Select --</option>
+				</select><br>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Team Size<span class='red'>* </span> : </span>
+      			<div class="col-sm-8">
+				<select id="M_size" class=" tb" name="M_size">
+					<option value=''>--Select --</option>
+				</select><br>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Environment <span class='red'>* </span> : </span>
+      			<div class="col-sm-8">
+				    <input type='text' class="form-control tb "  id='M_env' name='M_env'>
+      			</div>
+    		</div>
+<!!------------------mini Projefct------------.>
+		<div id='mini' style='display:none'>
+            <h5><strong> Mini Project</strong></h5>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Title </span>
+      			<div class="col-sm-8">
+				    <input type='text' class="form-control tb " id='mn_title' name='mn_title'>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Duration(in months)  </span>
+      			<div class="col-sm-8">
+				<select id="M_duration" class=" tb" name="M_duration">
+					<option value=''>--Select --</option>
+				</select><br>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Team Size </span>
+      			<div class="col-sm-8">
+				<select id="M_size" class=" tb" name="M_size">
+					<option value=''>--Select --</option>
+				</select><br>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Environment </span>
+      			<div class="col-sm-8">
+				    <input type='text' class="form-control tb "  id='M_env' name='M_env'>
+      			</div>
+    		</div>
+     </div>
+     <div class="form-group">
+      			<span class="control-label col-sm-4 ">
+				<a href="#" class="text-primary" id="mini_link"><u> Mini project</u> </a>			
+			</span>      			
+     </div>
+<!-----------------------Additional Project------------------->
+		<div id='additional' style='display:none'>
+         <h5><strong> Additional  Project</strong></h5>
+
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Title  </span>
+      			<div class="col-sm-8">
+				    <input type='text' class="form-control tb " id='A_title' name='A_title'>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Duration(in months) </span>
+      			<div class="col-sm-8">
+				<select id="A_duration" class=" tb" name="A_duration">
+					<option value=''>--Select --</option>
+				</select><br>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Team Size </span>
+      			<div class="col-sm-8">
+				<select id="A_size" class=" tb" name="s">
+					<option value=''>--Select --</option>
+				</select><br>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Environment  </span>
+      			<div class="col-sm-8">
+				    <input type='text' class="form-control tb "  id='A_env' name='A_env'>
+      			</div>
+    		</div>
+     </div>
+
+		<div class="form-group">
+      			<span class="control-label col-sm-4 ">
+				<a href="#" class="text-primary" id="additional_link"><u>Add Another project</u> </a>			
+			</span>      			
+    		</div>
+
+<!--------------Languages-------------------->
+	 <h5><strong>Languages Known</strong></h5>
+		<div class="form-group">
+			<span class="control-label col-sm-4" ></span>
+      			<div class="col-sm-8" id='languages'>
+ 				    <input type='text' class="form-control tb " name='lang1' id='lang1' ><br>
+              		<input type='text' class="form-control tb " name='lang2' id='lang2' ><br>
+      			</div>
+		</div>
+
+		<div class="form-group" >
+      			<span class="control-label col-sm-4 ">
+				<a href="#" class="text-primary" id='other_lang'><u>Add another language</u> </a>			
+			</span>      			
+    		</div>
+<!--------------Achievements -------------------->
+ 	<h5><strong>Achievements</strong></h5>
+		<div class="form-group">
+			<span class="control-label col-sm-4" ></span>
+      			<div class="col-sm-8" id='achievement'>
+ 				<input type='text' class="form-control tb " name='achievement1' id='achievement1' >
+      			</div>
+		</div>
+	
+	    <div class="form-group" >
+      			<span class="control-label col-sm-4 ">
+				<a href="#" class="text-primary" id='other_achievement'><u>Add Achievement</u> </a>			
+			</span>      			
+    	</div>
+
+		<center>
+		<button type="button" class="btn btn-primary btn-sm ">Save Changes</button>
+		<button type="button" class="btn btn-primary btn-sm ">Cancel</button>
+		</center>
+
+	  </form>
+	</div>
+
+	<div class='col-sm-2'></div>
+	</div>
+
+     </div>
+     <div class='col-sm-1'></div>
+  </div>
+	
+</div>
+</body>
+</html>

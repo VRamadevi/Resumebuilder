@@ -1,0 +1,323 @@
+<html>
+<head>
+  <link rel="stylesheet" href="{{MEDIA_URL}}css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{MEDIA_URL}}css/home.css">
+  <link rel="stylesheet" href="{{MEDIA_URL}}css/jquery-ui.css">
+
+  <script src="{{MEDIA_URL}}js/jquery.min.js"></script>  
+  <script src="{{MEDIA_URL}}js/jquery-1.9.1.js"></script>
+  <script src="{{MEDIA_URL}}js/jquery.validate.min.js"></script>
+  <script src="{{MEDIA_URL}}js/jquery-ui.js"></script> 
+  <script src="{{MEDIA_URL}}js/bootstrap.min.js"></script>
+  <script src="{{MEDIA_URL}}js/load.js"></script>
+  <script src="{{MEDIA_URL}}js/geturl.js"></script> 
+  <script src="{{MEDIA_URL}}js/Projects_validate.js"></script>
+
+ 	
+
+
+  <script type="text/javascript"> 	
+	$(document).ready(function(){	
+		var availableTags=[]
+		var Student_id= getUrlParameter('Student_id');
+ 		var formAction = $('#Projects_validate').attr('action');
+	   	$('#Projects_validate').attr('action', formAction + Student_id);
+
+
+		$("#mini_link").click(function(){
+			$("#mini").show();
+			$("#mini_link").hide();
+		})
+		$("#additional_link").click(function(){
+			$("#additional").show();
+			$("#additional_link").hide();
+		})
+
+		$.ajax({
+	   			url:'/Projects/',
+	   			type:'POST',
+	   			data:{'Student_id':Student_id},
+	   			success:function(result){
+				 if(result.success){
+					console.log(result)
+						for(i=0;i<result.Projects.length;i++)
+						{
+						       $("#M_title").val(result.Projects[i].M_Title)
+						       $("#M_duration").val(result.Projects[i].M_Duration)
+						       $("#M_size").val(result.Projects[i].M_Teamsize)
+		 				       $("#M_env").val(result.Projects[i].M_Description)
+						       $("#M_desc").val(result.Projects[i].M_Environment)
+						       $("#Mn_title").val(result.Projects[i].Mn_Title)
+						       $("#Mn_duration").val(result.Projects[i].Mn_Duration)
+						       $("#Mn_size").val(result.Projects[i].Mn_Teamsize)
+		 				       $("#Mn_env").val(result.Projects[i].Mn_Description)
+						       $("#Mn_desc").val(result.Projects[i].Mn_Environment)
+					               $("#A_title").val(result.Projects[i].A_Title)
+						       $("#A_duration").val(result.Projects[i].A_Duration)
+						       $("#A_size").val(result.Projects[i].A_Teamsize)
+		 				       $("#A_env").val(result.Projects[i].A_Description)
+						       $("#A_desc").val(result.Projects[i].A_Environment)
+						 }
+						for(i=0;i<result.Skills.length;i++){
+						     if (i<=1){ 					
+							$("#Skill"+(i+1)).val(result.Skills[i]);
+						     }
+						     else{
+							$("#Skills").append("<input type='text' class='form-control tb' name='Skill"+(i+1)+"' id='Skill"+(i+1)+"'/>");
+							$("#Skill"+(i+1)).val(result.Skills[i]);
+						     }
+						}	
+					
+						for(i=0;i<result.Languages.length;i++){
+						     if (i<=1){ 					
+							$("#lang"+(i+1)).val(result.Languages[i]);
+						     }
+						     else{
+							$("#languages").append("<input type='text' class='form-control tb' name='lang"+(i+1)+"' id='lang"+(i+1)+"'/>");
+							$("#lang"+(i+1)).val(result.Languages[i]);
+						     }
+						}
+					   for(i=0;i<result.Achievements.length;i++){
+						     if (i==0){ 					
+							$("#achievement1").val(result.Achievements[i]);
+						     }
+						     else{
+							$("#achievement").append("<input type='text' class='form-control tb' name='achievement"+(i+1)+"' id='achievement"+(i+1)+"'/>");
+							$("#achievement"+(i+1)).val(result.Achievements[i]);
+						     }
+						}	
+
+			         }
+				}, 
+		   })
+
+
+
+})
+
+$(function() {
+	Skills=[]
+	Skills1=[]
+      	var Skills_set= getUrlParameter('Skills_set');
+	Skills=Skills_set.split(',')
+	for(i=0;i<Skills.length;i++)
+	{
+		Skills1.push(Skills[i].replace(/["~!@#$%^&*\(\)_+=`{}\[\]\|\\:;'<>,.\/?"\- \t\r\n]+/g, ''));
+
+	}
+	availableTags =Skills1
+    	$(".Skills" ).autocomplete({
+            source: availableTags
+        })
+ })
+
+
+	
+  
+  </script>
+</head>
+
+<body>
+<div class ="container-fluid">
+  <div class='row'>
+     <div class='col-sm-1'></div>
+     <div class='col-sm-10'>
+	<img class='image-responsive' src="{{MEDIA_URL}}images/ts.png" style="height:13%">
+	<!--<span class='text-primary' style='width:25px'> Resume Builder</span>-->
+	<div  class='row' style="border:solid black 1px;padding:5px">	
+	<div class='col-sm-10'>
+
+	 <form  method='post'  action='/Projects_info/?Student_id=' enctype="multipart/form-data" class='form-horizontal' id='Projects_validate'>
+
+<!----- Projct Details -------------->
+  	     <h5><strong> Project Details</strong></h5>
+    	     <h5><strong> Main Project</strong></h5>
+
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Title <span class='red'>* </span> : </span>
+      			<div class="col-sm-8">
+				    <input type='text' class="form-control tb clear" id='M_title' name='M_title'>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Duration(in months) <span class='red'>* </span> : </span>
+      			<div class="col-sm-8">
+				<select id="M_duration" class="clear tb" name="M_duration">
+					<option value=''>--Select --</option>
+				</select><br>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Team Size<span class='red'>* </span> : </span>
+      			<div class="col-sm-8">
+				<select id="M_size" class=" tb" name="M_size">
+					<option value=''>--Select --</option>
+				</select><br>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Environment <span class='red'>* </span> : </span>
+      			<div class="col-sm-8">
+				    <input type='text' class="form-control tb "  id='M_env' name='M_env'>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Description <span class='red'>* </span> : </span>
+      			<div class="col-sm-8">
+				   <textarea class="form-control" rows="3" cols="5" id='M_desc' name='M_desc'></textarea>
+      			</div>
+    		</div>
+<!!------------------mini Projefct------------.>
+   <div id='mini' style='display:none'>
+            <h5><strong> Mini Project</strong></h5>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Title </span>
+      			<div class="col-sm-8">
+				    <input type='text' class="form-control tb " id='Mn_title' name='Mn_title'>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Duration(in months)  </span>
+      			<div class="col-sm-8">
+				<select id="M_duration" class=" tb" name="Mn_duration">
+					<option value=''>--Select --</option>
+				</select><br>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Team Size </span>
+      			<div class="col-sm-8">
+				<select id="M_size" class=" tb" name="Mn_size">
+					<option value=''>--Select --</option>
+				</select><br>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Environment </span>
+      			<div class="col-sm-8">
+				    <input type='text' class="form-control tb "  id='Mn_env' name='Mn_env'>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Description <span class='red'>* </span> : </span>
+      			<div class="col-sm-8">
+				   <textarea class="form-control" rows="3" cols="5" id='Mn_desc' name='Mn_desc'></textarea>
+      			</div>
+    		</div>
+     </div>
+     <div class="form-group">
+      			<span class="control-label col-sm-4 ">
+				<a href="#" class="text-primary" id="mini_link"><u> Mini project</u> </a>			
+			</span>      			
+     </div>
+<!-----------------------Additional Project------------------->
+		<div id='additional' style='display:none'>
+         <h5><strong> Additional  Project</strong></h5>
+
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Title  </span>
+      			<div class="col-sm-8">
+				    <input type='text' class="form-control tb " id='A_title' name='A_title'>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Duration(in months) </span>
+      			<div class="col-sm-8">
+				<select id="A_duration" class=" tb" name="A_duration">
+					<option value=''>--Select --</option>
+				</select><br>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Team Size </span>
+      			<div class="col-sm-8">
+				<select id="A_size" class=" tb" name="A_size">
+					<option value=''>--Select --</option>
+				</select><br>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Environment  </span>
+      			<div class="col-sm-8">
+				    <input type='text' class="form-control tb "  id='A_env' name='A_env'>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Description : </span>
+      			<div class="col-sm-8">
+				   <textarea class="form-control" rows="3" cols="5" id='A_desc' name='A_desc'></textarea>
+      			</div>
+    		</div>
+     </div>
+
+		<div class="form-group">
+      			<span class="control-label col-sm-4 ">
+				<a href="#" class="text-primary" id="additional_link"><u>Add Another project</u> </a>			
+			</span>      			
+    		</div>
+<!--------------  Skills ------------------->
+	<h5><strong>IT Skills</strong></h5>
+	<div class="form-group">
+			<span class="control-label col-sm-4" > Skills<span class='red'>* </span></span>
+      			<div class="col-sm-8 ui-widget" id='Skills'>
+ 				    <input type='text' class="form-control tb Skills" name='Skill1' id='Skill1' data-toggle="tooltip" 
+					title="Please enter only one IT Skill per box">
+ 				    <input type='text' class="form-control tb Skills" name='Skill2' id='Skill2' data-toggle="tooltip" 
+					title="Please enter only one IT Skill per box">
+      			</div>
+	</div>
+
+	<div class="form-group" >
+      			<span class="control-label col-sm-4 ">
+				<a href="#" class="text-primary" id='other_skill'><u>Add Another Skill</u> </a>			
+			</span>      			
+    	</div>
+	
+<!--------------Languages-------------------->
+	 <h5><strong>Languages Known</strong></h5>
+		<div class="form-group">
+			<span class="control-label col-sm-4" ></span>
+      			<div class="col-sm-8 " id='languages'>
+ 				    <input type='text' class="form-control tb " name='lang1' id='lang1'>
+              		<input type='text' class="form-control tb " name='lang2' id='lang2' >
+      			</div>
+		</div>
+
+		<div class="form-group" >
+      			<span class="control-label col-sm-4 ">
+				<a href="#" class="text-primary" id='other_lang'><u>Add another language</u> </a>			
+			</span>      			
+    		</div>
+<!--------------Achievements -------------------->
+ 	<h5><strong>Achievements</strong></h5>
+		<div class="form-group">
+			<span class="control-label col-sm-4" ></span>
+      			<div class="col-sm-8" id='achievement'>
+ 				<input type='text' class="form-control tb " name='achievement1' id='achievement1' >
+      			</div>
+		</div>
+	
+	    <div class="form-group" >
+      			<span class="control-label col-sm-4 ">
+				<a href="#" class="text-primary" id='other_achievement'><u>Add Achievement</u> </a>			
+			</span>      			
+    	</div>
+
+		<center>
+		<input type="submit" value="Save Changes" class="btn btn-primary btn-sm " />
+		<input value="Cancel" class="btn btn-primary btn-sm " id='cancel'/>
+		</center>
+
+	  </form>
+	</div>
+
+	<div class='col-sm-2'></div>
+	</div>
+
+     </div>
+     <div class='col-sm-1'></div>
+  </div>
+	
+</div>
+</body>
+</html>

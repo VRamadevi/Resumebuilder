@@ -1,0 +1,320 @@
+<html>
+<head>
+  <link rel="stylesheet" href="{{MEDIA_URL}}css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{MEDIA_URL}}css/home.css">
+
+  <script src="{{MEDIA_URL}}js/jquery.min.js"></script>  
+  <script src="{{MEDIA_URL}}js/bootstrap.min.js"></script>
+  <script src="{{MEDIA_URL}}js/load.js"></script>
+  <script src="{{MEDIA_URL}}js/resume2.js"></script>
+
+  	
+  <script type="text/javascript"> 	
+	$(document).ready(function(){
+		$("#pg_link").click(function(){ $("#pg").show(); $("#pg_link").hide();});
+		$("#certificate_link").click(function(){ $("#certificate").show(); $("#certificate_link").hide();});
+
+		$("#Xboard,#X2board").append("<option value='ICSE'>ICSE (Indian Certificate Secondary Education)</option>"+	
+					   "<option value='CBSE'>CBSE(Central board of secondary education)</option>"+
+					   "<option value='IB'>IB(International Baccalaureate)</option>"+
+					   "<option value='SB'>State board</option>");			
+
+		$("#UGcourse").click(function(){
+			UGcourse=$("#UGcourse").val();
+			   $.ajax({
+	   			url:'/UG_specialisations/',
+	   			type:'POST',
+	   			data:{'UGcourse':UGcourse},
+	   			success:function(result){	
+				    if(result.success){
+					$("#UGspec").empty();
+					$("#UGspec").append("<option value =''>-- Select --</option>");
+				        for(i=0;i<result.UG_specialisations.length;i++){
+					   $("#UGspec").append("<option value='"+result.UG_specialisations[i]+"'>"+result.UG_specialisations[i]+"</option>");
+				        }
+				    }		
+				}, 
+			    })		
+		})
+		$("#PGcourse").click(function(){
+			PGcourse=$("#PGcourse").val();
+			   $.ajax({
+	   			url:'/PG_specialisations/',
+	   			type:'POST',
+	   			data:{'PGcourse':PGcourse},
+	   			success:function(result){	
+				    if(result.success){
+					$("#PGspec").empty();
+					$("#PGspec").append("<option value =''>-- Select --ss</option>");
+				        for(i=0;i<result.PG_specialisations.length;i++){
+					   $("#PGspec").append("<option value='"+result.PG_specialisations[i]+"'>"+result.PG_specialisations[i]+"</option>");
+				        }
+				    }		
+				}, 
+			    })		
+		})
+
+
+        })
+	
+	
+  
+  </script>
+</head>
+
+<body>
+<div class ="container-fluid">
+  <div class='row'>
+     <div class='col-sm-1'></div>
+     <div class='col-sm-10'>
+	<img class='image-responsive' src="{{MEDIA_URL}}images/ts.png" style="height:13%">
+	<!--<span class='text-primary' style='width:25px'> Resume Builder</span>-->
+	<div  class='row' style="border:solid black 1px;padding:5px">	
+	<div class='col-sm-10'>
+
+	 <form  method='post'  action='Education_info/' enctype="multipart/form-data" class='form-horizontal'  onsubmit='return checkform2()'>
+	  <!----- SSC-------------->
+	  <h5><strong>Education Details</strong></h5>
+ 		<h5> <strong>SSC </strong></h5>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Select Board <span class='red'>* </span> : </span>
+      			<div class="col-sm-8">
+				<select id="Xboard" class="form-controltb" name="Xboard" onblur='return XBoard_valid()'>
+					<option value=''>--Select --</option>
+				</select><br>
+				<span class='red' id= 'Xboard_test'></span>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >School <span class='red'>* </span> : </span>
+      			<div class="col-sm-8">
+			    <input type='text' class="form-control tb " name='Xschool' onblur='return Xschool_valid()' >
+			    <span class='red' id= 'Xschool_test'></span>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Year Of Pass <span class='red'>* </span> : </span>
+      			<div class="col-sm-8">
+				<select id="Xyear" class=" tb" name="Xyear" onblur='return Xyear_valid()'>
+					<option value=''>--Select --</option>
+				</select><br>
+			    	<span class='red' id= 'Xyear_test'></span>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Marks (%) <span class='red'>* </span> : </span>
+      			<div class="col-sm-8">
+				<input type='text' class="form-control tb " name='Xmarks' onblur='return Xmarks_valid()'>
+			    	<span class='red' id= 'Xmarks_test'></span>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" style="color:#987B04">Upload Certificate <span class='red'>* </span> :</span>
+      			<div class="col-sm-8">
+				    <input type='file' name='Xcertificate'  id='Xcertificate' onblur='return Xcertificate_valid()'>
+			    	  <span class='red' id= 'Xcertificate_test'></span>
+      			</div>
+    		</div>
+
+	
+	
+	  <!----- Intermediate-------------->
+	  
+		<h5><strong>Intermediate </strong></h5>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Select Board <span class='red'>* </span> : </span>
+      			<div class="col-sm-8">
+				<select id="X2board" class="form-controltb" name="X2board" onblur='return X2Board_valid()'>
+					<option value=''>--Select --</option>
+				</select><br>
+				<span class='red' id= 'X2board_test'></span>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >School/College <span class='red'>* </span> : </span>
+      			<div class="col-sm-8">
+			    <input type='text' class="form-control tb " name='X2school' onblur='return X2school_valid()'>
+			    <span class='red' id= 'X2school_test'></span>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Year Of Pass <span class='red'>* </span> : </span>
+      			<div class="col-sm-4">
+				<select id="X2year" class=" tb" name="X2year" onblur='return X2year_valid()'>
+					<option value="">--Select --</option>
+				</select><br>
+			    <span class='red' id= 'X2year_test'></span>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Marks (%) <span class='red'>* </span> : </span>
+      			<div class="col-sm-8	">
+				<input type='text' class="form-control tb " name='X2marks' onblur='return X2marks_valid()' >
+			    	<span class='red' id= 'X2marks_test'></span>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" style="color:#987B04">Upload Certificate <span class='red'>* </span> :</span>
+      			<div class="col-sm-8">
+				    <input type='file'   name='X2certificate'  id='X2certificate' onblur='return X2certificate_valid()'>
+			    	  <span class='red' id= 'X2certificate_test'></span>
+      			</div>
+    		</div>
+
+<!-- UGgggggggggg--------------------------->
+
+
+		<h5><strong>Basic Qualification</strong></h5>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Course Name <span class='red'>* </span> : </span>
+      			<div class="col-sm-4">
+				<select class=" tb" id= "UGcourse" name="UGcourse" onblur="return UGcourse_valid()">
+					<option value=''>--Select --</option>
+				</select><br>
+			       <span class='red' id= 'UGcourse_test'></span>
+
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Specialisation <span class='red'>* </span> : </span>
+      			<div class="col-sm-4">
+				<select  class=" tb" id="UGspec" name="UGspec" onblur="return UGspec_valid()">
+					<option value=''>--Select --</option>
+				</select><br>
+				<span class='red' id= 'UGspec_test'></span>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Institute/University <span class='red'>* </span> : </span>
+      			<div class="col-sm-4">
+				<select class=" tb University" name="UGuniv" onblur="return UGuniv_valid()">
+					<option value=''>--Select --</option>
+				</select><br>
+				<span class='red' id= 'UGuniv_test'></span>
+	
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Graduated in <span class='red'>* </span> : </span>
+      			<div class="col-sm-4">
+				<select id="UGyear" class=" tb" name="UGyear" onblur="return UGyear_valid()">
+					<option  value=''>--Select --</option>
+				</select><br>
+				<span class='red' id= 'UGyear_test'></span>
+
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Marks (%) <span class='red'>* </span> : </span>
+      			<div class="col-sm-4">
+			    <input type='text' class="form-control tb " name='UGmarks' onblur="return UGmarks_valid()">
+      			</div>
+				<span class='red' id= 'UGmarks_test'></span>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" style="color:#987B04">Upload Certificate <span class='red'>* </span> :</span>
+      			<div class="col-sm-8">
+				 <input type='file'  id='UGcertf' name='UGcertf' onblur="return UGcertf_valid()">
+				<span class='red' id= 'UGcertf_test'></span>
+      			</div>
+    		</div>
+		<!----- Masters Block-------------->
+	   <div style="display: none;" id="pg">
+		<h5><strong>Post Graduation</strong></h5>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Course Name : </span>
+      			<div class="col-sm-4">
+				<select class=" tb" id='PGcourse' name="PGcourse" onblur="return PGcourse_valid()">
+					<option value=''>--Select --</option>
+				</select><br>
+				<span class='red' id= 'PGcourse_test'></span>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Specialisation : </span>
+      			<div class="col-sm-4">
+				<select id="PGspec" class=" tb" name="PGspec" onblur="return PGspec_valid()">
+					<option value=''>--Select --</option>
+				</select><br>
+				<span class='red' id= 'PGspec_test'></span>
+
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Institute/University : </span>
+      			<div class="col-sm-4">
+				<select class=" tb University" name="PGuniv" onblur="return PGuniv_valid()">
+					<option value=''>--Select --</option>
+				</select><br>
+				<span class='red' id= 'PGuniv_test'></span>
+
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Graduated in : </span>
+      			<div class="col-sm-4">
+				<select id="PGyear" class=" tb"  name="PGyear" onblur="return PGyear_valid()">
+					<option>--Select --</option>
+				</select><br>
+				<span class='red' id= 'PGyear_test'></span>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Marks (%) : </span>
+      			<div class="col-sm-4">
+				<input type='text' class="form-control tb "  name='PGmarks' onblur="return PGmarks_valid()">
+				<span class='red' id= 'PGmarks_test'></span>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" style="color:#987B04">Upload Certificate  :</span>
+      			<div class="col-sm-8">
+				<input type='file'   name='PGcertf_' onblur="return PGcertf_valid()">
+				<span class='red' id= 'PGcertf_test'></span>
+      			</div>
+    		</div>
+
+
+
+	   </div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4 ">
+				<a href="#" class="text-primary" id="pg_link"><u>Add Masters Education</u> </a>			
+			</span>      			
+    		</div>	
+	<!----- Certificatess Block-------------->
+	
+ 		<div class="form-group" style="display: none;" id="certificate">
+		<h5><strong>Certificaates</strong></h5>
+      			<span class="control-label col-sm-4">Enter Certificate Course Name : </span>
+      			<div class="col-sm-8">
+			    <input type='text' class="form-control tb " name='Cerrtification'>
+      			</div>
+		</div>
+
+		<div class="form-group">
+      			<span class="control-label col-sm-4">
+				<a href="#" class="text-primary" id="certificate_link"><u>Add Certificates</u> </a>			
+			</span>
+			<div class="col-sm-4"></div>
+      			
+    		</div>	<br>		
+	
+		<center>
+		<input type="submit" value="Save Changes" class="btn btn-primary btn-sm " />.
+		<input type="submit" value="Cancel" class="btn btn-primary btn-sm " />.
+		</center>
+
+	  </form>
+	</div>
+
+	<div class='col-sm-2'></div>
+	</div>
+
+     </div>
+     <div class='col-sm-1'></div>
+  </div>
+	
+</div>
+</body>
+</html>

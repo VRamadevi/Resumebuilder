@@ -1,0 +1,303 @@
+<html>
+<head>
+  <link rel="stylesheet" href="{{MEDIA_URL}}css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{MEDIA_URL}}css/home.css">
+
+  <script src="{{MEDIA_URL}}js/jquery.min.js"></script>  
+  <script src="{{MEDIA_URL}}js/jquery-1.9.1.js"></script>
+  <script src="{{MEDIA_URL}}js/jquery.validate.min.js"></script>
+  <script src="{{MEDIA_URL}}js/bootstrap.min.js"></script>
+  <script src="{{MEDIA_URL}}js/load.js"></script>
+  <script src="{{MEDIA_URL}}js/geturl.js"></script> 
+  <script src="{{MEDIA_URL}}js/Education_validate.js"></script>
+
+  	
+  <script type="text/javascript"> 	
+	$(document).ready(function(){
+		var Student_id= getUrlParameter('Student_id');
+ 		var formAction = $('#Education_validate').attr('action');
+	   	$('#Education_validate').attr('action', formAction + Student_id);
+
+		$("#pg_link").click(function(){ $("#pg").show(); $("#pg_link").hide();});
+
+		$("#Xboard,#X2board").append("<option value='ICSE'>ICSE (Indian Certificate Secondary Education)</option>"+	
+					   "<option value='CBSE'>CBSE(Central board of secondary education)</option>"+
+					   "<option value='IB'>IB(International Baccalaureate)</option>"+
+					   "<option value='SB'>State board</option>");	
+
+		$.ajax({
+	   			url:'/Education/',
+	   			type:'POST',
+	   			data:{'Student_id':Student_id},
+	   			success:function(result){
+				    if(result.success){
+						console.log(result);
+						for(i=0;i<result.Educations.length;i++)
+						{
+						       $("#Xboard").val(result.Educations[i].X_board)
+						       $("#Xschool").val(result.Educations[i].X_school)
+						       $("#Xyear").val(result.Educations[i].X_year)
+		 				       $("#Xmarks").val(result.Educations[i].X_percentage)
+						       $("#X2board").val(result.Educations[i].XII_board)
+						       $("#X2school").val(result.Educations[i].XII_school)
+		 				       $("#X2year").val(result.Educations[i].XII_year)
+						       $("#X2marks").val(result.Educations[i].XII_percentage)
+						       $("#UGcourse").val(result.Educations[i].UG_course)
+						       $("#UGspec").val(result.Educations[i].UG_specialisation)
+		 				       $("#UGuniv").val(result.Educations[i].UG_university)
+						       $("#UGyear").val(result.Educations[i].UG_year)
+						       $("#UGmarks").val(result.Educations[i].UG_percentage)					
+						 }
+						$("#certification").empty();
+						
+						for(i=0;i<result.Certifications.length;i++){				   
+							
+							$("#certification").append("<input type='text' class='form-control tb' name='Certification"+(i+1)+"' id='Certification"+(i+1)+"'/>");
+							$("#Certification"+(i+1)).val(result.Certifications[i]);
+						     
+						}				
+
+				    }		
+				}, 
+		   })
+		
+	
+        })
+	
+	
+  
+  </script>
+</head>
+
+<body>
+<div class ="container-fluid">
+  <div class='row'>
+     <div class='col-sm-1'></div>
+     <div class='col-sm-10'>
+	<img class='image-responsive' src="{{MEDIA_URL}}images/ts.png" style="height:13%">
+	<!--<span class='text-primary' style='width:25px'> Resume Builder</span>-->
+	<div  class='row' style="border:solid black 1px;padding:5px">	
+	<div class='col-sm-10'>
+
+	 <form  method='post'  action="/Education_info/?Student_id="  enctype="multipart/form-data" class='form-horizontal' id='Education_validate'>
+	  <!----- SSC-------------->
+	  <h5><strong>Education Details</strong></h5>
+ 		<h5> <strong>SSC </strong></h5>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Select Board <span class='red'>* </span> : </span>
+      			<div class="col-sm-8">
+				<select id="Xboard" class="form-controltb" name="Xboard">
+					<option value=''>--Select --</option>
+				</select><br>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >School <span class='red'>* </span> : </span>
+      			<div class="col-sm-8">
+			    <input type='text' class="form-control tb " id='Xschool' name='Xschool' >
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Year Of Pass <span class='red'>* </span> : </span>
+      			<div class="col-sm-8">
+				<select id="Xyear" class=" tb" name="Xyear" >
+					<option value=''>--Select --</option>
+				</select><br>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Marks (%) <span class='red'>* </span> : </span>
+      			<div class="col-sm-8">
+				<input type='text' class="form-control tb " id='Xmarks' name='Xmarks' >
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" style="color:#987B04">Upload Certificate <span class='red'>* </span> :</span>
+      			<div class="col-sm-8">
+				    <input type='file' name='Xcertificate'  id='Xcertificate' >
+      			</div>
+    		</div>
+
+	
+	
+	  <!----- Intermediate-------------->
+	  
+		<h5><strong>Intermediate </strong></h5>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Select Board <span class='red'>* </span> : </span>
+      			<div class="col-sm-8">
+				<select id="X2board" class="form-controltb" name="X2board" >
+					<option value=''>--Select --</option>
+				</select><br>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >School/College <span class='red'>* </span> : </span>
+      			<div class="col-sm-8">
+			    <input type='text' class="form-control tb " id='X2school' name='X2school' >
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Year Of Pass <span class='red'>* </span> : </span>
+      			<div class="col-sm-4">
+				<select id="X2year" class=" tb" name="X2year">
+					<option value="">--Select --</option>
+				</select><br>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Marks (%) <span class='red'>* </span> : </span>
+      			<div class="col-sm-8	">
+				<input type='text' class="form-control tb " id='X2marks' name='X2marks'  >
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" style="color:#987B04">Upload Certificate <span class='red'>* </span> :</span>
+      			<div class="col-sm-8">
+				    <input type='file'   name='X2certificate'  id='X2certificate' >
+      			</div>
+    		</div>
+
+<!-- UGgggggggggg--------------------------->
+
+
+		<h5><strong>Basic Qualification</strong></h5>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Course Name <span class='red'>* </span> : </span>
+      			<div class="col-sm-4">
+				<select class=" tb" id= "UGcourse" name="UGcourse" >
+					<option value=''>--Select --</option>
+				</select><br>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Specialisation <span class='red'>* </span> : </span>
+      			<div class="col-sm-4">
+				<select  class=" tb" id="UGspec" name="UGspec" >
+					<option value=''>--Select --</option>
+				</select><br>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Institute/University <span class='red'>* </span> : </span>
+      			<div class="col-sm-4">
+				<select class=" tb University" id='UGuniv' name="UGuniv" >
+					<option value=''>--Select --</option>
+				</select><br>	
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Graduated in <span class='red'>* </span> : </span>
+      			<div class="col-sm-4">
+				<select id="UGyear" class=" tb"  name="UGyear" >
+					<option  value=''>--Select --</option>
+				</select><br>
+
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Marks (%) <span class='red'>* </span> : </span>
+      			<div class="col-sm-4">
+			    <input type='text' class="form-control tb " id='UGmarks' name='UGmarks'>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" style="color:#987B04">Upload Certificate <span class='red'>* </span> :</span>
+      			<div class="col-sm-8">
+				 <input type='file'  id='UGcertf' name='UGcertf' >
+      			</div>
+    		</div>
+		<!----- Masters Block-------------->
+	   <div style="display: none;" id="pg">
+		<h5><strong>Post Graduation</strong></h5>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Course Name: </span>
+      			<div class="col-sm-4">
+				<select class=" tb" id='PGcourse' name="PGcourse" >
+					<option value=''>--Select --</option>
+				</select><br>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Specialisation : </span>
+      			<div class="col-sm-4">
+				<select id="PGspec" class=" tb" name="PGspec" id='PGspec' >
+					<option value=''>--Select --</option>
+				</select><br>
+
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Institute/University  : </span>
+      			<div class="col-sm-4">
+				<select class=" tb University" name="PGuniv" id='PGuniv'>
+					<option value=''>--Select --</option>
+				</select><br>
+
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Graduated in  : </span>
+      			<div class="col-sm-4">
+				<select id="PGyear" class=" tb"  name="PGyear" id='PGyear' >
+					<option  value=''>--Select --</option>
+				</select><br>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Marks (%) : </span>
+      			<div class="col-sm-4">
+				<input type='text' class="form-control tb " id='PGmarks' name='PGmarks' >
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" style="color:#987B04">Upload Certificate :</span>
+      			<div class="col-sm-8">
+				<input type='file' id='PGcertf'   name='PGcertf' >
+      			</div>
+    		</div>
+
+
+
+	   </div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4 ">
+				<a href="#" class="text-primary" id="pg_link"><u>Add Masters Education</u> </a>			
+			</span>      			
+    		</div>	
+	<!----- Certificatess Block-------------->
+	
+ 		<div class="form-group" >
+		<h5><strong>Certification course</strong></h5>
+      			<span class="control-label col-sm-4">Enter Certificate Course Name <span class='red'>* </span> : </span>
+      			<div class="col-sm-8" id="certification">
+			    <input type='text' class="form-control tb" name='Certification1' id='Certification1'>
+      			</div>
+		</div>
+
+		<div class="form-group">
+      			<span class="control-label col-sm-4">
+				<a href="#" class="text-primary" id="certification_link" ><u>Add another Certification</u> </a>			
+			</span>
+			<div class="col-sm-4"></div>
+      			
+    		</div>	<br>		
+	
+		<center>
+		<input type="submit" value="Save Changes" class="btn btn-primary btn-sm " />.
+		<input type="button" value="Cancel" class="btn btn-primary btn-sm " id='cancel' />.
+		</center>
+
+	  </form>
+	</div>
+
+	<div class='col-sm-2'></div>
+	</div>
+
+     </div>
+     <div class='col-sm-1'></div>
+  </div>
+	
+</div>
+</body>
+</html>

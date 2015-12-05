@@ -1,0 +1,109 @@
+<html>
+<head>
+  <link rel="stylesheet" href="{{MEDIA_URL}}css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{MEDIA_URL}}css/home.css">
+  <link rel="stylesheet" href="{{MEDIA_URL}}css/jquery-ui.css">
+  <link rel="stylesheet" href="{{MEDIA_URL}}css/home.css">
+
+  <script src="{{MEDIA_URL}}js/jquery.min.js"></script> 
+  <script src="{{MEDIA_URL}}js/jquery-1.9.1.js"></script>
+  <script src="{{MEDIA_URL}}js/jquery.validate.min.js"></script> 
+  <script src="{{MEDIA_URL}}js/jquery-ui.js"></script>
+  <script src="{{MEDIA_URL}}js/bootstrap.min.js"></script>  
+  <script src="{{MEDIA_URL}}js/load.js"></script>
+  <script src="{{MEDIA_URL}}js/geturl.js"></script> 
+  <script src="{{MEDIA_URL}}js/Personal_validate.js"></script>
+
+  	
+  <script type="text/javascript"> 	
+	$(document).ready(function(){
+		var Student_id= getUrlParameter('Student_id');
+		$( "#datepicker" ).datepicker({
+  			dateFormat: "dd-mm-yy"
+		});
+
+
+
+		var Student_id= getUrlParameter('Student_id');
+ 		var formAction = $('#Personal_validate').attr('action');
+	   	$('#Personal_validate').attr('action', formAction + Student_id);
+
+		$.ajax({
+	   			url:'/Personal/',
+	   			type:'POST',
+	   			data:{'Student_id':Student_id},
+	   			success:function(result){
+				 if(result.success){
+					console.log(result)
+					$("#datepicker").val(result.dob);
+					$("#address").val(result.address);
+					$("#hobbies").val(result.hobbies);	
+				 }
+				},
+		});
+       })
+	
+  
+  </script>
+</head>
+
+<body>
+<div class ="container-fluid">
+  <div class='row'>
+     <div class='col-sm-1'></div>
+     <div class='col-sm-10'>
+	<img class='image-responsive' src="{{MEDIA_URL}}images/ts.png" style="height:13%">
+	<!--<span class='text-primary' style='width:25px'> Resume Builder</span>-->
+	<div  class='row' style="border:solid black 1px;padding:5px">	
+	<div class='col-sm-10'>
+
+ <form  method='post'  action='/Personal_info/?Student_id=' enctype="multipart/form-data" class='form-horizontal' id='Personal_validate'>
+	  	<h5><strong>Personal details</strong></h5>	
+ 		
+		<div class="form-group">
+      			<span class="control-label col-sm-4" for="email">Date Of Birth <span class='red'>* </span> : </span>
+      			<div class="col-sm-8">
+			    <input type='text' class="form-control tb required date dateLessThanToday" name='dob' id="datepicker">
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" for="email">Address <span class='red'>* </span> : </span>
+      			<div class="col-sm-8">
+  			     <textarea class="form-control" rows="4" id ="address" name='address'></textarea>
+      			</div>
+    		</div>
+
+		<div class="form-group">
+      			<span class="control-label col-sm-4" for="email">Hobbies <span class='red'>* </span> : </span>
+      			<div class="col-sm-8">
+  				<textarea class="form-control" rows="4" name='hobbies' id='hobbies'></textarea>
+      			</div>
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Upload Photo <span class='red'>* </span> :</span>
+      			<div class="col-sm-8">
+			   <input type='file' name='profile_pic' id='profile_pic' >
+      			</div>
+    		</div>
+
+<br>
+		
+
+		<center>
+		<input type="submit" value="Save and Generate PDF" class="btn btn-primary btn-sm " />.
+		<input type="button" value="Cancel" class="btn btn-primary btn-sm " id='cancel' />.
+		</center>
+
+	  </form>
+	</div>
+
+	<div class='col-sm-2'></div>
+	</div>
+
+     </div>
+     <div class='col-sm-1'></div>
+  </div>
+	
+</div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+.red{
+	color:red;
+}
+.tb{
+	height:24px;
+	border-radius:initial;
+}
+label{
+	font-weight:0px !important;
+
+}
+
+.form-control{
+	width:35% ! important;
+	padding:0px !important;
+
+}
+.form-group {
+    	margin-bottom: 4px !important;
+	
+}
+ .error {
+  color:#FB3A3A;
+  font-weight:bold;
+}
+
+
+
+
+
+
+

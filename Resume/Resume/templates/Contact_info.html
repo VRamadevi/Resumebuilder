@@ -1,0 +1,82 @@
+<html>
+<head>
+  <link rel="stylesheet" href="{{MEDIA_URL}}css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{MEDIA_URL}}css/home.css">
+
+  <script src="{{MEDIA_URL}}js/jquery.min.js"></script>  
+  <script src="{{MEDIA_URL}}js/jquery-1.9.1.js"></script>
+  <script src="{{MEDIA_URL}}js/jquery.validate.min.js"></script>
+  <script src="{{MEDIA_URL}}js/bootstrap.min.js"></script>  
+  <script src="{{MEDIA_URL}}js/load.js"></script>
+  <script src="{{MEDIA_URL}}js/Contact_validate.js"></script>
+  	
+  <script type="text/javascript"> 	
+	$(document).ready(function(){
+		$("input[name=Email]").focus();	
+	
+        })
+  
+  </script>
+
+</head>
+
+<body>
+<div class ="container-fluid">
+  <div class='row'>
+     <div class='col-sm-1'></div>
+     <div class='col-sm-10'>
+	<img class='image-responsive' src="{{MEDIA_URL}}images/ts.png" style="height:13%">
+	<!--<span class='text-primary' style='width:25px'> Resume Builder</span>-->
+	<div  class='row' style="border:solid black 1px;padding:5px">	
+	<div class='col-sm-10'>
+	 <form  method='post' action='Contact_info/' enctype="multipart/form-data" class='form-horizontal' id='Contact_validate' >
+	  	<h5><strong>Contact Information</strong></h5>	
+ 		<div class="form-group">
+      			<span class="control-label col-sm-4">Enter your Email ID <span class='red'>* </span> : </span>
+      			<div class="col-sm-8">
+			    <input type='text' class="form-control tb " name='Email' onblur='Email_info()'>
+      			</div>
+		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Mobile No <span class='red'>* </span> : </span>
+      			<div class="col-sm-8">
+			    <input type='text' class="form-control tb " name='Mobile'>
+      			</div>
+
+    		</div>
+		<div class="form-group">
+      			<span class="control-label col-sm-4" >Enter your Full Name <span class='red'>* </span> : </span>
+      			<div class="col-sm-8">
+			    <input type='text' class="form-control tb " name='Name' lettersonly>
+      			</div>
+    		</div><br>
+		
+	<!--Profile Information ---------------------------->
+	<h5><strong>Profile  Information</strong></h5>	
+ 		<div class="form-group">
+      			<span class="control-label col-sm-4">Resume Headline <span class='red'>* </span> : </span>
+      			<div class="col-sm-8">
+  				<textarea class="form-control" rows="2"  name='Headline' id='Headline'></textarea>
+      			</div>
+		</div><br>
+
+
+		<center>
+		<input type="submit" value="Save Changes" class="btn btn-primary btn-sm " />.
+		<input type="button" value="Cancel" class="btn btn-primary btn-sm " id='cancel' />.
+		</center>
+
+	  </form>
+	</div>
+
+	<div class='col-sm-2'></div>
+	</div>
+
+     </div>
+     <div class='col-sm-1'></div>
+  </div>
+	
+</div>
+</body>
+
+</html>

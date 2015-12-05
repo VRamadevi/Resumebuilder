@@ -1,0 +1,51 @@
+function checkform4(){
+
+	if(dob_valid()){}else{return false;}
+	if(address_valid()){}else{return false;}
+	if(hobbies_valid()){}else{return false;}
+	if(profile_pic_valid()){}else{return false;}
+	
+return true;
+}
+function dob_valid(){
+	dob=$("input[name=dob]").val();
+	if(dob=='' || dob==null ){
+		$("#dob_test").empty();
+		$("#dob_test").append("Please Select Date OF Birth");
+		return false;		
+	}
+	else{$("#dob_test").empty();}
+return true;
+
+}
+function address_valid(){
+	address=$("textarea[name=address]").val();
+	if(address=='' || address==null ){
+		$("#address_test").empty();
+		$("#address_test").append("Please Enter Address");
+		return false;		
+	}
+	else{$("#address_test").empty();}
+return true;
+}
+function hobbies_valid(){
+	hobbies=$("textarea[name=hobbies]").val();
+	if(hobbies=='' || hobbies==null ){
+		$("#hobbies_test").empty();
+		$("#hobbies_test").append("Please Enter Hobbies");
+		return false;		
+	}
+	else{$("#hobbies_test").empty();}
+return true;
+}
+function profile_pic_valid(){
+	profile_pic=$("#profile_pic").val();
+	if(profile_pic=='' || profile_pic==null){
+	$("#profile_pic_test").empty();
+		$("#profile_pic_test").append("Please Upload your Profile picture");
+		return false;		
+	}
+	else{$("#profile_pic_test").empty();}
+return true;
+}
+

@@ -1,0 +1,52 @@
+---
+A_Description: "Application of Client Server Model. It shows how clients can connect\
+  \   to the server and\r\n\r\naccess data from the server database  and see file\
+  \ description in an auto view format."
+A_Duration: '3'
+A_Environment: 'Environment     :  Visual Basic 6.0'
+A_Teamsize: '2'
+A_Title: Proxy Network Application
+Achievements:
+- Achievement1
+Address: "Vazhappilly House,\r\n Edathuruthi,                                    \
+  \                        Karamcode P.O.                                        \
+  \            Kochi, Kerala."
+Certifications:
+- Certification on Python
+- Certification on Python
+DOB: 2015-12-03
+Email: test@gmail.com
+Headline: ''
+Hobbies: Reading , Sports, S/W Development
+Languages: Malayalam,English,Hindi
+M_Description: "Application of Client Server Model. It shows how clients can connect\
+  \   to the server and \r\n\r\naccess data from the server database  and see file\
+  \ description in an auto view format."
+M_Duration: '4'
+M_Environment: Java 2.0, Java Swing, Oracle
+M_Teamsize: '1'
+M_Title: Web
+Mn_Description: ''
+Mn_Duration: ''
+Mn_Environment: ''
+Mn_Teamsize: ''
+Mn_Title: ''
+Name: ''
+PG_course: M.Sc
+PG_percentage: 84
+PG_year: 1926
+Phone: 0
+Skills:
+  Programming Language: Cobol,Java
+UG_course: B.Sc
+UG_percentage: 85
+UG_university: Anna University
+UG_year: 1917
+XII_percentage: 85
+XII_school: KERALA UNIVERSITY
+XII_year: 1901
+X_percentage: 86
+X_school: BOARD OF SECONDARY   EDUCATION, KERALA
+X_year: 1903
+pG_university: Anna University
+---
